@@ -17,7 +17,7 @@
     [Core.Log]
     LogOnline=All
 
-## URL命令行传入：
+## URL命令行传入
     -Port=8888
 
     BaseEngine.ini
@@ -61,7 +61,7 @@ Just change SetReplicates(true); to '''bReplicates = true;''' in the constru
 ```
 
 
-## 判定是否运行在服务器上：
+## 判定是否运行在服务器上
 ```c++
 /** Returns whether the world this object is in is the host or not */
 UFUNCTION(BlueprintPure, Category="Networking", meta=(WorldContext="WorldContextObject") )
@@ -84,6 +84,7 @@ bool UKismetSystemLibrary::IsServer(const UObject* WorldContextObject)
 
 ## 默认地图配置及调用的代码 
 ```c++
+//UnrealEngine\Engine\Source\Runtime\EngineSettings\Classes\GameMapsSettings.h
 UGameMapsSettings
 	static FString GetGameDefaultMap( );
 	static FString GetGlobalDefaultGameMode( );
