@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogDemoReplication, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(Demo, Log, All);
 
 
 extern FString LogTag;

@@ -7,7 +7,7 @@
 
 IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, DemoReplication, "DemoReplication");
 
-DEFINE_LOG_CATEGORY(LogDemoReplication)
+DEFINE_LOG_CATEGORY(Demo)
 
 FString LogTag = TEXT("N/A");
 APlayerState* g_PlayerState = nullptr;
@@ -98,7 +98,7 @@ void DemoLog(const TCHAR* Fmt, ...)
 
 	SET_WARN_COLOR(COLOR_CYAN);
 	//UE_LOG(LogHAL, SetColor, TEXT("%s"), COLOR_CYAN)
-	UE_LOG(LogDemoReplication, Warning, TEXT("%s [%s] %s"), *LogTag, *PlayerInfo, *ResultString);
+	UE_LOG(Demo, Warning, TEXT("%s [%s] %s"), *LogTag, *PlayerInfo, *ResultString);
 	CLEAR_WARN_COLOR();
 	//UE_LOG(LogHAL, SetColor, TEXT("%s"), COLOR_NONE);
 }
