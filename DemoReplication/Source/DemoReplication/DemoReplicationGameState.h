@@ -17,4 +17,10 @@ class DEMOREPLICATION_API ADemoReplicationGameState : public AGameStateBase
 protected:
 
 	virtual void BeginPlay() override;
+	virtual void Destroyed() override;
+
+public:
+	
+	ADemoReplicationGameState();
+
 };

@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "DemoReplicationPlayerController.h"
+#include "DemoReplication.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Runtime/Engine/Classes/Components/DecalComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
@@ -11,6 +12,25 @@ ADemoReplicationPlayerController::ADemoReplicationPlayerController()
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
+
+
+	DemoLog(this, TEXT("[Init][ADemoReplicationPlayerController::Ctor]"));
+}
+
+void ADemoReplicationPlayerController::BeginPlay()
+{
+	DemoLog(this, TEXT("[Init][ADemoReplicationPlayerController::BeginPlay]"));
+
+	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
+	Super::BeginPlay();
+}
+
+void ADemoReplicationPlayerController::Destroyed()
+{
+	DemoLog(this, TEXT("[Init][ADemoReplicationPlayerController::Destroyed]"));
+
+	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
+	Super::Destroyed();
 }
 
 void ADemoReplicationPlayerController::PlayerTick(float DeltaTime)

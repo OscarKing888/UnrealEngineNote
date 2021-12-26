@@ -14,9 +14,17 @@ class ADemoReplicationGameMode : public AGameModeBase
 protected:
 
 	virtual void BeginPlay() override;
+	virtual void Destroyed() override;
+
+
+
+	virtual void StartPlay() override;
 
 public:
 	ADemoReplicationGameMode();
+
+	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
+
 };
 
 

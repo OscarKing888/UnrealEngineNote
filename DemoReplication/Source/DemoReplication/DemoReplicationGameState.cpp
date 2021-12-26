@@ -5,19 +5,34 @@
 #include "DemoReplication.h"
 
 
+
+ADemoReplicationGameState::ADemoReplicationGameState()
+{
+	DemoLog(this, TEXT("[Init][ADemoReplicationGameState::Ctor]"));
+}
+
+
 void ADemoReplicationGameState::BeginPlay()
 {
-	Super::BeginPlay();
-
 	if (this->HasAuthority())
 	{
-		LogTag = TEXT("GameState[服务器]");
+		g_Authority = TEXT("GameState[服务器]");
 	}
 	else
 	{
-		LogTag = TEXT("GameState[客户端]");
+		g_Authority = TEXT("GameState[客户端]");
 	}
 
-	DemoLog(TEXT("[GameState::BeginPlay]"));
+	DemoLog(this, TEXT("[Init][ADemoReplicationGameState::BeginPlay]"));
 
+	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
+	Super::BeginPlay();
+}
+
+void ADemoReplicationGameState::Destroyed()
+{
+	DemoLog(this, TEXT("[Init][ADemoReplicationGameState::Destroyed]"));
+
+	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
+	Super::Destroyed();
 }

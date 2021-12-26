@@ -7,7 +7,7 @@
 DECLARE_LOG_CATEGORY_EXTERN(Demo, Log, All);
 
 
-extern FString LogTag;
+extern FString g_Authority;
 extern class APlayerState* g_PlayerState;
 
-void DemoLog(const TCHAR* Fmt, ...);
+void DemoLog(UObject* Context, const TCHAR* Fmt, ...);

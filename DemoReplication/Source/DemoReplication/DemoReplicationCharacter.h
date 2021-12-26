@@ -14,6 +14,10 @@ class ADemoReplicationCharacter : public ACharacter
 public:
 	ADemoReplicationCharacter();
 
+	virtual void BeginPlay() override;
+	virtual void Destroyed() override;
+
+
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 

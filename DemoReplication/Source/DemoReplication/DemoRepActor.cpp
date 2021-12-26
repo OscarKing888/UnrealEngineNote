@@ -11,16 +11,22 @@ ADemoRepActor::ADemoRepActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	bReplicates = true;
-
+	DemoLog(this, TEXT("[Init][ADemoRepActor::Ctor]"));
 }
 
 // Called when the game starts or when spawned
 void ADemoRepActor::BeginPlay()
 {
-	Super::BeginPlay();
+	DemoLog(this, TEXT("[Init][ADemoRepActor::BeginPlay]"));
 
-	DemoLog(TEXT("%s [ADemoRepActor::BeginPlay] DemoReplicateIntValue:%d"), *LogTag, DemoReplicateIntValue);
-	
+	Super::BeginPlay();	
+}
+
+void ADemoRepActor::Destroyed()
+{
+	DemoLog(this, TEXT("[Init][ADemoRepActor::Destroyed]"));
+
+	Super::Destroyed();
 }
 
 // Called every frame
@@ -32,12 +38,12 @@ void ADemoRepActor::Tick(float DeltaTime)
 
 void ADemoRepActor::OnRep_DemoReplicateIntValue()
 {
-	DemoLog(TEXT("[ADemoRepActor::OnRep_DemoReplicateIntValue] 同步值:%d"), DemoReplicateIntValue);
+	DemoLog(this, TEXT("[ADemoRepActor::OnRep_DemoReplicateIntValue] 同步值:%d"), DemoReplicateIntValue);
 }
 
 void ADemoRepActor::ModifyDemoValue(int Val)
 {
-	DemoLog(TEXT("[ADemoRepActor::ModifyDemoValue] 新值:%d"), Val);
+	DemoLog(this, TEXT("[ADemoRepActor::ModifyDemoValue] 新值:%d"), Val);
 	DemoReplicateIntValue = Val;
 }
 

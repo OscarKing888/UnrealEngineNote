@@ -24,4 +24,8 @@ protected:
 	virtual void OnRep_UniqueId() override;
 	virtual void OnRep_bIsInactive() override;
 	virtual void OnRep_Score() override;
+
+public:
+	
+	ADemoRepPlayerState();
 };

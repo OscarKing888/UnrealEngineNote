@@ -19,6 +19,7 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	virtual void FinishDestroy() override;
 
 public:	
 	// Called every frame

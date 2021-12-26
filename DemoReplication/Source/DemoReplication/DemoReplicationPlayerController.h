@@ -13,6 +13,9 @@ class ADemoReplicationPlayerController : public APlayerController
 
 public:
 	ADemoReplicationPlayerController();
+	virtual void BeginPlay() override;
+	virtual void Destroyed() override;
+
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */

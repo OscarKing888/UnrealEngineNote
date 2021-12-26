@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "DemoReplicationCharacter.h"
+#include "DemoReplication.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
 #include "Components/DecalComponent.h"
@@ -14,6 +15,8 @@
 
 ADemoReplicationCharacter::ADemoReplicationCharacter()
 {
+	DemoLog(this, TEXT("[Init][ADemoReplicationCharacter::Ctor]"));
+
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -87,4 +90,22 @@ void ADemoReplicationCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+}
+
+
+void ADemoReplicationCharacter::BeginPlay()
+{
+	DemoLog(this, TEXT("[Init][ADemoReplicationCharacter::BeginPlay]"));
+
+	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
+	Super::BeginPlay();
+
+}
+
+void ADemoReplicationCharacter::Destroyed()
+{
+	DemoLog(this, TEXT("[Init][ADemoReplicationCharacter::Destroyed]"));
+
+	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
+	Super::Destroyed();
 }
