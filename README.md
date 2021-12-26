@@ -2,13 +2,10 @@
 
 
 ## 打开SHIPPING LOG
-
     bUseLoggingInShipping = true;
 
-## 增加Build Target
-
+## 增加Server Build Target
     Source/XXX.Target.cs -> XXXServer.Target.cs
-
     Type = TargetType.Server;
 
 
@@ -21,11 +18,11 @@
     -Port=8888
 
     BaseEngine.ini
-    - [URL]
-    - Protocol=unreal
-    - Name=Player
-	- SaveExt=usa
-	- Port=7777
+    [URL]
+    Protocol=unreal
+    Name=Player
+	SaveExt=usa
+	Port=7777
 
 
 ```c++
@@ -83,9 +80,18 @@ bool UKismetSystemLibrary::IsServer(const UObject* WorldContextObject)
 ```
 
 ## 默认地图配置及调用的代码 
+
+**UGameMapsSettings**  
+UnrealEngine\Engine\Source\Runtime\EngineSettings\Classes\GameMapsSettings.h
 ```c++
-//UnrealEngine\Engine\Source\Runtime\EngineSettings\Classes\GameMapsSettings.h
-UGameMapsSettings
-	static FString GetGameDefaultMap( );
-	static FString GetGlobalDefaultGameMode( );
+static FString GetGameDefaultMap( );
+static FString GetGlobalDefaultGameMode( );
 ```
+
+
+
+@startuml
+object foo
+object bar
+foo -> bar
+@enduml
