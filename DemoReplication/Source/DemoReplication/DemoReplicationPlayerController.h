@@ -6,7 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "DemoReplicationPlayerController.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable, BlueprintType)
 class ADemoReplicationPlayerController : public APlayerController
 {
 	GENERATED_BODY()
@@ -16,6 +16,24 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Destroyed() override;
 
+	UFUNCTION(Client, Unreliable, BlueprintCallable, Category=Demo)
+	void ClientFun();
+
+	UFUNCTION(Server, Unreliable, BlueprintCallable, Category=Demo)
+	void ServerFun();
+
+	UFUNCTION(NetMulticast, Unreliable, BlueprintCallable, Category=Demo)
+	void ServerAndClientFun();
+
+
+	UFUNCTION(BlueprintCallable, Category=Demo)
+	void BP_DemoFunction();
+
+	UFUNCTION(BlueprintImplementableEvent, Category=Demo)
+	void BP_DemoEvent();
+
+	UFUNCTION(BlueprintNativeEvent, Category=Demo)
+	void BP_DemoNativeEvent();
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */

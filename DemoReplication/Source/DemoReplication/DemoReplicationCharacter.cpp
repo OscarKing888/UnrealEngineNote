@@ -17,6 +17,9 @@ ADemoReplicationCharacter::ADemoReplicationCharacter()
 {
 	DemoLog(this, TEXT("[Init][ADemoReplicationCharacter::Ctor]"));
 
+	BaseTurnRate = 45.f;
+	BaseLookUpRate = 45.f;
+
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -92,7 +95,6 @@ void ADemoReplicationCharacter::Tick(float DeltaSeconds)
 	}
 }
 
-
 void ADemoReplicationCharacter::BeginPlay()
 {
 	DemoLog(this, TEXT("[Init][ADemoReplicationCharacter::BeginPlay]"));
@@ -108,4 +110,58 @@ void ADemoReplicationCharacter::Destroyed()
 
 	// 重载函数一定要调用底层，不管有没有功能，养成习惯免得漏掉
 	Super::Destroyed();
+}
+
+
+void ADemoReplicationCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAxis("MoveForward", this, &ADemoReplicationCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ADemoReplicationCharacter::MoveRight);
+}
+
+
+void ADemoReplicationCharacter::TurnAtRate(float Rate)
+{
+	// calculate delta for this frame from the rate information
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ADemoReplicationCharacter::LookUpAtRate(float Rate)
+{
+	// calculate delta for this frame from the rate information
+	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+}
+
+void ADemoReplicationCharacter::MoveForward(float Value)
+{
+	if ((Controller != nullptr) && (Value != 0.0f))
+	{
+		// find out which way is forward
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// get forward vector
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void ADemoReplicationCharacter::MoveRight(float Value)
+{
+	if ((Controller != nullptr) && (Value != 0.0f))
+	{
+		// find out which way is right
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+		// get right vector 
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		// add movement in that direction
+		AddMovementInput(Direction, Value);
+	}
 }

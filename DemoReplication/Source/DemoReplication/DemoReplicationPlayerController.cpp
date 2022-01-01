@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "DemoReplicationPlayerController.h"
 #include "DemoReplication.h"
@@ -21,7 +21,7 @@ void ADemoReplicationPlayerController::BeginPlay()
 {
 	DemoLog(this, TEXT("[Init][ADemoReplicationPlayerController::BeginPlay]"));
 
-	// ÖØÔØº¯ÊýÒ»¶¨Òªµ÷ÓÃµ×²ã£¬²»¹ÜÓÐÃ»ÓÐ¹¦ÄÜ£¬Ñø³ÉÏ°¹ßÃâµÃÂ©µô
+	// é‡è½½å‡½æ•°ä¸€å®šè¦è°ƒç”¨åº•å±‚ï¼Œä¸ç®¡æœ‰æ²¡æœ‰åŠŸèƒ½ï¼Œå…»æˆä¹ æƒ¯å…å¾—æ¼æŽ‰
 	Super::BeginPlay();
 }
 
@@ -29,8 +29,33 @@ void ADemoReplicationPlayerController::Destroyed()
 {
 	DemoLog(this, TEXT("[Init][ADemoReplicationPlayerController::Destroyed]"));
 
-	// ÖØÔØº¯ÊýÒ»¶¨Òªµ÷ÓÃµ×²ã£¬²»¹ÜÓÐÃ»ÓÐ¹¦ÄÜ£¬Ñø³ÉÏ°¹ßÃâµÃÂ©µô
+	// é‡è½½å‡½æ•°ä¸€å®šè¦è°ƒç”¨åº•å±‚ï¼Œä¸ç®¡æœ‰æ²¡æœ‰åŠŸèƒ½ï¼Œå…»æˆä¹ æƒ¯å…å¾—æ¼æŽ‰
 	Super::Destroyed();
+}
+
+void ADemoReplicationPlayerController::ClientFun_Implementation()
+{
+	DemoLog(this, TEXT("[RPC][ADemoReplicationPlayerController::ClientFun_Implementation]åœ¨å®¢æˆ·ç«¯è°ƒç”¨"));
+}
+
+void ADemoReplicationPlayerController::ServerFun_Implementation()
+{
+	DemoLog(this, TEXT("[RPC][ADemoReplicationPlayerController::ClientFun_Implementation] åœ¨æœåŠ¡å™¨è°ƒç”¨"));
+}
+
+void ADemoReplicationPlayerController::ServerAndClientFun_Implementation()
+{
+	DemoLog(this, TEXT("[RPC][ADemoReplicationPlayerController::ClientFun_Implementation] åœ¨å®¢æˆ·ç«¯å’ŒæœåŠ¡å™¨è°ƒç”¨"));
+}
+
+void ADemoReplicationPlayerController::BP_DemoFunction()
+{
+	DemoLog(this, TEXT("[BP][ADemoReplicationPlayerController::BP_DemoFunction] æ¼”ç¤ºè“å›¾è°ƒç”¨å‡½æ•°"));
+}
+
+void ADemoReplicationPlayerController::BP_DemoNativeEvent_Implementation()
+{
+	DemoLog(this, TEXT("[BP][ADemoReplicationPlayerController::BP_DemoNativeEvent_Implementation] æ¼”ç¤ºNativeäº‹ä»¶"));
 }
 
 void ADemoReplicationPlayerController::PlayerTick(float DeltaTime)
@@ -57,6 +82,7 @@ void ADemoReplicationPlayerController::SetupInputComponent()
 	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ADemoReplicationPlayerController::MoveToTouchLocation);
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &ADemoReplicationPlayerController::OnResetVR);
+
 }
 
 void ADemoReplicationPlayerController::OnResetVR()
